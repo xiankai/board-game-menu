@@ -80,6 +80,12 @@ export type UsersState = {
   viewer: ?User,
 };
 
+export type BoardState = {
+  appetizers: ?Array,
+  lightFare: ?Array,
+  mainCourse: ?Array,
+};
+
 // State
 
 export type State = {
@@ -92,6 +98,7 @@ export type State = {
   intl: IntlState,
   todos: TodosState,
   users: UsersState,
+  bpard: BoardState,
 };
 
 // Actions

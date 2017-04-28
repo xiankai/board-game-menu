@@ -7,6 +7,7 @@ import device from './device/reducer';
 import intl from './intl/reducer';
 import todos from './todos/reducer';
 import users from './users/reducer';
+import board from './board/reducer';
 import { combineReducers } from 'redux';
 import { fieldsReducer as fields } from './lib/redux-fields';
 
@@ -48,6 +49,7 @@ const configureReducer = (platformReducers: Object, initialState: Object) => {
     intl,
     todos,
     users,
+    board,
   });
 
   // The power of higher-order reducers, http://slides.com/omnidan/hor
