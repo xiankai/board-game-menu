@@ -54,20 +54,25 @@ export default class BoardGame extends Component {
     }
 
     return (
-      <Box>
+      <div>
+        <div style={{ verticalAlign: 'top', display: 'inline-block' }}>
         <Image
           src={image}
           size={{ height: 100, width: 100 }}
           title={name}
         />
-        <h1>
+        </div>
+        <div style={{ display: 'inline-block', marginLeft: 10, width: 'calc(100% - 110px)' }}>
+          <div>
           <strong>{ name }</strong>
+          </div>
+          <div>
           <span>{ players }</span>
           <span>{ playtime }</span>
-        </h1>
+          </div>
         <textarea
-          cols="30"
-          rows="10"
+            style={{ width: '100%' }}
+            rows="4"
           defaultValue={description}
         />
         {
@@ -95,7 +100,8 @@ export default class BoardGame extends Component {
             </Button>
           ))
         }
-      </Box>
+        </div>
+      </div>
     );
   }
 }
