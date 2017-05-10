@@ -14,27 +14,12 @@ import {
 } from '../../common/components';
 import { Link, Title } from '../components';
 import Label from './Label';
+import Description from './Description';
 
-import { connect } from 'react-redux';
-import { description, resetDescription } from '../../common/board/actions';
-
-class BoardGame extends Component {
-  constructor() {
-    super();
-
-    this.state = { debounced: null };
-  }
-
-  handleDescriptionChange = e => {
-    const { dispatch, id } = this.props;
-    // clearTimeout(this.state.debounced);
-    // this.state.debounced = setTimeout(() => {
-      dispatch(description(id, e.target.value));
-    // }, 2000);
-  };
-
+export default class BoardGame extends Component {
   render() {
     const {
+      id,
       name,
       image,
       description,
@@ -104,17 +89,9 @@ class BoardGame extends Component {
               }
             </div>
           </div>
-          <textarea
-            style={{ width: '100%' }}
-            rows="4"
-            value={customDescription || description}
-            onChange={this.handleDescriptionChange}
-          />
+          <Description description={description} id={+id} />
         </div>
       </div>
     );
   }
 }
- export default connect(
-  (state, props) => ({ customDescription: state.board.description[props.id] }),
- )(BoardGame);

@@ -102,8 +102,7 @@ class BoardPage extends Component {
 
     return (
       <div>
-        <h1
-style={{
+        <h1 style={{
           fontFamily: ['Monsieur La Doulaise', 'cursive'],
           fontSize: 85,
           margin: '0 auto',
