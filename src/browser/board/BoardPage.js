@@ -15,6 +15,8 @@ import {
 import { Link, Title } from '../components';
 import BoardGame from './BoardGame';
 
+import he from 'he';
+
 import { connect } from 'react-redux';
 import { populate, error } from '../../common/board/actions';
 
@@ -58,7 +60,7 @@ class BoardPage extends Component {
             (${item.querySelector('yearpublished').getAttribute('value')})
           `,
           image: item.querySelector('image').textContent,
-          description: item.querySelector('description').textContent,
+            description: he.decode(item.querySelector('description').textContent),
           minPlayers: +item.querySelector('minplayers').getAttribute('value'),
           maxPlayers: +item.querySelector('maxplayers').getAttribute('value'),
           playingtime: +item.querySelector('playingtime').getAttribute('value'),
