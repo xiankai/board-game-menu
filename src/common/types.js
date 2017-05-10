@@ -81,9 +81,11 @@ export type UsersState = {
 };
 
 export type BoardState = {
-  appetizers: ?Array,
-  lightFare: ?Array,
-  mainCourse: ?Array,
+  appetizers: Array,
+  lightFare: Array,
+  mainCourse: Array,
+  description: Object,
+  error: String,
 };
 
 // State

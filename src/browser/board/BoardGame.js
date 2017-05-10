@@ -13,15 +13,25 @@ import {
   ToggleBaseline,
 } from '../../common/components';
 import { Link, Title } from '../components';
+import Label from './Label';
 
-export default class BoardGame extends Component {
+import { connect } from 'react-redux';
+import { description, resetDescription } from '../../common/board/actions';
+
+class BoardGame extends Component {
   constructor() {
     super();
 
-    this.state = {
-      description: [],
-    };
+    this.state = { debounced: null };
   }
+
+  handleDescriptionChange = e => {
+    const { dispatch, id } = this.props;
+    // clearTimeout(this.state.debounced);
+    // this.state.debounced = setTimeout(() => {
+      dispatch(description(id, e.target.value));
+    // }, 2000);
+  };
 
   render() {
     const {
@@ -35,6 +45,8 @@ export default class BoardGame extends Component {
       maxplaytime,
       category,
       mechanic,
+
+      customDescription,
     } = this.props;
 
     const players = minPlayers === maxPlayers
@@ -56,52 +68,53 @@ export default class BoardGame extends Component {
     return (
       <div>
         <div style={{ verticalAlign: 'top', display: 'inline-block' }}>
-        <Image
-          src={image}
-          size={{ height: 100, width: 100 }}
-          title={name}
-        />
+          <Image
+            src={image}
+            // src={'//placehold.it/100x100'}
+            size={{ height: 100, width: 100 }}
+            title={name}
+          />
         </div>
         <div style={{ display: 'inline-block', marginLeft: 10, width: 'calc(100% - 110px)' }}>
           <div>
-          <strong>{ name }</strong>
+            <div style={{ display: 'inline-block' }}>
+              <div>
+                <strong>{ name }</strong>
+              </div>
+              <div>
+                <span>{ players }</span>
+                <span>{ playtime }</span>
+              </div>
+            </div>
+            <div style={{ display: 'inline-block' }}>
+              {
+                category.map(category => (
+                  <Label>
+                    { category }
+                  </Label>
+                ))
+              }
+
+              {
+                mechanic.map(mechanic => (
+                  <Label>
+                    { mechanic }
+                  </Label>
+                ))
+              }
+            </div>
           </div>
-          <div>
-          <span>{ players }</span>
-          <span>{ playtime }</span>
-          </div>
-        <textarea
+          <textarea
             style={{ width: '100%' }}
             rows="4"
-          defaultValue={description}
-        />
-        {
-          category.map(category => (
-            <Button
-              primary
-              size={-1}
-              marginHorizontal={0.25}
-              key={category}
-            >
-              { category }
-            </Button>
-          ))
-        }
-
-        {
-          mechanic.map(mechanic => (
-            <Button
-              primary
-              size={-1}
-              marginHorizontal={0.25}
-              key={mechanic}
-            >
-              { mechanic }
-            </Button>
-          ))
-        }
+            value={customDescription || description}
+            onChange={this.handleDescriptionChange}
+          />
         </div>
       </div>
     );
   }
 }
+ export default connect(
+  (state, props) => ({ customDescription: state.board.description[props.id] }),
+ )(BoardGame);

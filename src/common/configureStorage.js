@@ -9,6 +9,7 @@ const paths = [
   ['fields'],
   ['intl', ['currentLocale']],
   ['users', ['viewer']],
+  ['board', ['appetizers', 'lightFare', 'mainCourse', 'descriptions']],
 ];
 
 const transforms = [];

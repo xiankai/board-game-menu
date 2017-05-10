@@ -5,6 +5,7 @@ const initialState = {
   appetizers: [],
   lightFare: [],
   mainCourse: [],
+  description: {},
   error: '',
 };
 
@@ -23,6 +24,7 @@ const reducer = (
       const mainCourse = boardgames.filter(a => a.playingtime >= 180).sort(sort);
 
       return {
+        ...state,
         appetizers,
         lightFare,
         mainCourse,
@@ -34,6 +36,26 @@ const reducer = (
       return {
         ...state,
         error: action.payload,
+      };
+    }
+
+    case 'DESCRIPTION': {
+      return {
+        ...state,
+        description: {
+          ...state.description,
+          [action.payload.id]: action.payload.description,
+        },
+      };
+    }
+
+    case 'RESET_DESCRIPTION': {
+      return {
+        ...state,
+        description: {
+          ...state.description,
+          [action.payload]: '',
+        },
       };
     }
 

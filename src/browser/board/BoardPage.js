@@ -31,53 +31,61 @@ class BoardPage extends Component {
   }
 
   componentDidMount() {
+    return this.setState({ loading: false }); // for debug
     const { dispatch, params: { user } } = this.props;
 
     const fetchGames = fetch(`${corsProxy}/${bggApi}/collection/?username=${user}`)
-        .then(resp => resp.text())
-        .then(text => {
-          const items = new DOMParser()
-            .parseFromString(text, 'text/xml')
-            .querySelectorAll('[subtype="boardgame"]');
-
-          return Array.prototype.map.call(items, item => item.getAttribute('objectid'));
-        })
-        .catch(reason => {
-          dispatch(error(`Failed to load games: ${reason}`));
-          this.setState({ loading: false });
-        });
-
-    fetchGames.then(objects => fetch(`${corsProxy}/${bggApi}/thing/?id=${objects.join(',')}`)
       .then(resp => resp.text())
       .then(text => {
         const items = new DOMParser()
           .parseFromString(text, 'text/xml')
-          .querySelectorAll('item');
+          .querySelectorAll('[subtype="boardgame"]');
 
-        const boardgames = Array.prototype.map.call(items, item => ({
-          name: `
-            ${item.querySelector('name').getAttribute('value')}
-            (${item.querySelector('yearpublished').getAttribute('value')})
-          `,
-          image: item.querySelector('image').textContent,
+        return Array.prototype.map.call(items, item => item.getAttribute('objectid'));
+      });
+
+    fetchGames.then(
+      objects => fetch(`${corsProxy}/${bggApi}/thing/?id=${objects.join(',')}`)
+        .then(resp => resp.text())
+        .then(text => {
+          const items = new DOMParser()
+            .parseFromString(text, 'text/xml')
+            .querySelectorAll('item');
+
+          const getTags = (item, tag) =>
+            Array.prototype.map.call(
+              Array.prototype.filter.call(
+                item.querySelectorAll('link'),
+                link => link.getAttribute('type') === tag,
+              ),
+              item => item.getAttribute('value'),
+            );
+
+          const boardgames = Array.prototype.map.call(items, item => ({
+            id: item.getAttribute('id'),
+            name: `
+              ${item.querySelector('name').getAttribute('value')}
+              (${item.querySelector('yearpublished').getAttribute('value')})
+            `,
+            image: item.querySelector('image').textContent,
             description: he.decode(item.querySelector('description').textContent),
-          minPlayers: +item.querySelector('minplayers').getAttribute('value'),
-          maxPlayers: +item.querySelector('maxplayers').getAttribute('value'),
-          playingtime: +item.querySelector('playingtime').getAttribute('value'),
-          minplaytime: +item.querySelector('minplaytime').getAttribute('value'),
-          maxplaytime: +item.querySelector('maxplaytime').getAttribute('value'),
-          category: Array.prototype.map.call(item.querySelectorAll('boardgamecategory'), category => category.getAttribute('value')),
-          mechanic: Array.prototype.map.call(item.querySelectorAll('boardgamemechanic'), mechanic => mechanic.getAttribute('value')),
-        }));
+            minPlayers: +item.querySelector('minplayers').getAttribute('value'),
+            maxPlayers: +item.querySelector('maxplayers').getAttribute('value'),
+            playingtime: +item.querySelector('playingtime').getAttribute('value'),
+            minplaytime: +item.querySelector('minplaytime').getAttribute('value'),
+            maxplaytime: +item.querySelector('maxplaytime').getAttribute('value'),
+            category: getTags(item, 'boardgamecategory'),
+            mechanic: getTags(item, 'boardgamemechanic'),
+          }));
 
-        dispatch(populate(boardgames));
+          dispatch(populate(boardgames));
+          this.setState({ loading: false });
+        }),
+      reason => {
+        dispatch(error(`Failed to fetch game data: ${reason}`));
         this.setState({ loading: false });
-      }),
-    )
-    .catch(reason => {
-      dispatch(error(`Failed to fetch game data: ${reason}`));
-      this.setState({ loading: false });
-    });
+      },
+    );
   }
 
   render() {
@@ -93,7 +101,15 @@ class BoardPage extends Component {
     } = this.props;
 
     return (
-      <Box>
+      <div>
+        <h1
+style={{
+          fontFamily: ['Monsieur La Doulaise', 'cursive'],
+          fontSize: 85,
+          margin: '0 auto',
+        }}>
+          Board Game Menu
+        </h1>
         <Title message="Board Games" />
         {
           error
@@ -105,7 +121,7 @@ class BoardPage extends Component {
             description="Under an hour"
           />
         }
-        { appetizers.map(game => <BoardGame {...game} />)}
+        { appetizers.map(game => <BoardGame key={game.id} {...game} />)}
         {
           lightFare.length > 0 &&
           <PageHeader
@@ -113,7 +129,7 @@ class BoardPage extends Component {
             description="1 - 3 hours"
           />
         }
-        { lightFare.map(game => <BoardGame {...game} />)}
+        { lightFare.map(game => <BoardGame key={game.id} {...game} />)}
         {
           mainCourse.length > 0 &&
           <PageHeader
@@ -121,8 +137,8 @@ class BoardPage extends Component {
             description="> 3 hours"
           />
         }
-        { mainCourse.map(game => <BoardGame {...game} />)}
-      </Box>
+        { mainCourse.map(game => <BoardGame key={game.id} {...game} />)}
+      </div>
     );
   }
 }
