@@ -69,28 +69,26 @@ export default class BoardGame extends Component {
                 <strong>{ name }</strong>
               </div>
               <div>
-                <span>{ players }</span>
-                <span>{ playtime }</span>
+            <span>{ players }</span> <span>{ playtime }</span>
               </div>
-            </div>
-            <div style={{ display: 'inline-block' }}>
+          <div style={{ margin: '5px 0' }}>
               {
                 category.map(category => (
-                  <Label>
+                <Label key={category} type="primary">
                     { category }
                   </Label>
                 ))
               }
-
+          </div>
+          <div>
               {
                 mechanic.map(mechanic => (
-                  <Label>
+                <Label key={mechanic} type="danger">
                     { mechanic }
                   </Label>
                 ))
               }
             </div>
-          </div>
           <Description
             id={+id}
             description={description}
