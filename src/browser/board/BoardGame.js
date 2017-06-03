@@ -56,13 +56,15 @@ export default class BoardGame extends Component {
           <Image
             src={image}
             // src={'//placehold.it/100x100'}
-            size={{ height: 100, width: 100 }}
+            size={{ height: 150, width: 150 }}
             title={name}
           />
         </div>
-        <div style={{ display: 'inline-block', marginLeft: 10, width: 'calc(100% - 110px)' }}>
-          <div>
-            <div style={{ display: 'inline-block' }}>
+        <div style={{
+          display: 'inline-block',
+          marginLeft: 10,
+          width: 'calc(100% - 160px)',
+        }}>
               <div>
                 <strong>{ name }</strong>
               </div>
@@ -89,7 +91,10 @@ export default class BoardGame extends Component {
               }
             </div>
           </div>
-          <Description description={description} id={+id} />
+          <Description
+            id={+id}
+            description={description}
+          />
         </div>
       </div>
     );

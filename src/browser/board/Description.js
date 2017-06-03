@@ -38,6 +38,10 @@ class Description extends React.Component {
             customDescription,
         } = this.props;
 
+        const actualDescription = customDescription || description;
+        const parsed = actualDescription.split(/\n+/);
+        const actualBlurb = parsed[0].length >= 140 ? parsed[0] : parsed[1];
+
         return (
             <div>
                 <p style={{
@@ -51,7 +55,7 @@ class Description extends React.Component {
                             fontSize: 14,
                         }}
                         rows="20"
-                        value={customDescription || description}
+                        value={actualBlurb}
                         onChange={this.handleDescriptionChange}
                         onBlur={this.saveDescription}
                     />
@@ -62,7 +66,7 @@ class Description extends React.Component {
                 }}
                     onClick={this.editDescription}
                 >
-                    { customDescription || description }
+                    { actualBlurb }
                 </p>
             </div>
         );
