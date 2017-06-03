@@ -34,7 +34,7 @@ class BoardPage extends Component {
     return this.setState({ loading: false }); // for debug
     const { dispatch, params: { user } } = this.props;
 
-    const fetchGames = fetch(`${corsProxy}/${bggApi}/collection/?username=${user}`)
+    const fetchGames = fetch(`${corsProxy}/${bggApi}/collection/?username=${user}&excludesubtype=boardgameexpansion`)
       .then(resp => resp.text())
       .then(text => {
         const items = new DOMParser()
