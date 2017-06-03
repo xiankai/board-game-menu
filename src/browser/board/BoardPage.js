@@ -88,6 +88,12 @@ class BoardPage extends Component {
     );
   }
 
+  handleSuccintToggle = () => {
+    this.setState({
+      succint: !this.state.succint,
+    });
+  }
+
   render() {
     if (this.state.loading) {
       return <span>Loading...</span>;
@@ -110,6 +116,10 @@ class BoardPage extends Component {
           Board Game Menu
         </h1>
         <Title message="Board Games" />
+        <label>
+          <input type="checkbox" checked={this.state.succint} onChange={this.handleSuccintToggle} />
+          Succint Descriptions? (limits to 3 lines max)
+        </label>
         {
           error
         }
@@ -120,7 +130,7 @@ class BoardPage extends Component {
             description="Under an hour"
           />
         }
-        { appetizers.map(game => <BoardGame key={game.id} {...game} />)}
+        { appetizers.map(game => <BoardGame key={game.id} {...game} succint={this.state.succint} />)}
         {
           lightFare.length > 0 &&
           <PageHeader
@@ -128,7 +138,7 @@ class BoardPage extends Component {
             description="1 - 3 hours"
           />
         }
-        { lightFare.map(game => <BoardGame key={game.id} {...game} />)}
+        { lightFare.map(game => <BoardGame key={game.id} {...game} succint={this.state.succint} />)}
         {
           mainCourse.length > 0 &&
           <PageHeader
@@ -136,7 +146,7 @@ class BoardPage extends Component {
             description="> 3 hours"
           />
         }
-        { mainCourse.map(game => <BoardGame key={game.id} {...game} />)}
+        { mainCourse.map(game => <BoardGame key={game.id} {...game} succint={this.state.succint} />)}
       </div>
     );
   }

@@ -32,6 +32,7 @@ export default class BoardGame extends Component {
       mechanic,
 
       customDescription,
+      succint,
     } = this.props;
 
     const players = minPlayers === maxPlayers
@@ -65,33 +66,34 @@ export default class BoardGame extends Component {
           marginLeft: 10,
           width: 'calc(100% - 160px)',
         }}>
-              <div>
-                <strong>{ name }</strong>
-              </div>
-              <div>
-            <span>{ players }</span> <span>{ playtime }</span>
-              </div>
-          <div style={{ margin: '5px 0' }}>
-              {
-                category.map(category => (
-                <Label key={category} type="primary">
-                    { category }
-                  </Label>
-                ))
-              }
+          <div>
+            <strong>{ name }</strong>
           </div>
           <div>
-              {
-                mechanic.map(mechanic => (
+            <span>{ players }</span> <span>{ playtime }</span>
+          </div>
+          <div style={{ margin: '5px 0' }}>
+            {
+              category.map(category => (
+                <Label key={category} type="primary">
+                  { category }
+                </Label>
+              ))
+            }
+          </div>
+          <div>
+            {
+              mechanic.map(mechanic => (
                 <Label key={mechanic} type="danger">
-                    { mechanic }
-                  </Label>
-                ))
-              }
-            </div>
+                  { mechanic }
+                </Label>
+              ))
+            }
+          </div>
           <Description
             id={+id}
             description={description}
+            succint={succint}
           />
         </div>
       </div>

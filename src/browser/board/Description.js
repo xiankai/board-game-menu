@@ -36,6 +36,7 @@ class Description extends React.Component {
         const {
             description,
             customDescription,
+            succint,
         } = this.props;
 
         const actualDescription = customDescription || description;
@@ -62,7 +63,16 @@ class Description extends React.Component {
                 </p>
                 <p style={{
                     whiteSpace: 'pre-wrap',
-                    display: this.state.editable ? 'none' : 'block',
+                    display: this.state.editable ? 'none' : '-webkit-box',
+                    fontSize: 15,
+                    lineHeight: 1.2,
+                    height: 15 * 1.2 * 3,
+                    ...succint ? {
+                        overflow: 'hidden',
+                        textOverflow: 'ellipsis',
+                        WebkitLineClamp: 3,
+                        WebkitBoxOrient: 'vertical',
+                    } : {},
                 }}
                     onClick={this.editDescription}
                 >
