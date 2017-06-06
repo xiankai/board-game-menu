@@ -46,7 +46,6 @@ const App = (
       >
         {children}
       </Box>
-      <Footer />
     </Container>
   </Baseline>
 );
