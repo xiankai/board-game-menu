@@ -13,6 +13,7 @@ import {
   ToggleBaseline,
 } from '../../common/components';
 import { Link, Title } from '../components';
+import Header from './Header';
 import BoardGame from './BoardGame';
 
 import he from 'he';
@@ -111,14 +112,8 @@ class BoardPage extends Component {
 
     return (
       <div>
-        <h1 style={{
-          fontFamily: ['Indie Flower', 'cursive'],
-          fontSize: 65,
-          margin: '0 auto',
-        }}>
-          { message }
-        </h1>
         <Title message={message} />
+        <Header message={message} />
 
         <p>
           <strong>Notes: </strong>
@@ -129,6 +124,17 @@ class BoardPage extends Component {
           <br />
           Click anywhere outside of the textbox to exit editing.
         </p>
+
+        <p>
+          <strong>Tips for printing: </strong>
+          <br />
+          Set margins to none.
+          <br />
+          Skip the first page by specifying pages 2-x where x is the total number of pages.
+        </p>
+
+        <Button success onClick={window.print}>Print</Button>
+
         <label>
           <input type="checkbox" checked={this.state.succint} onChange={this.handleSuccintToggle} />
           Succint Descriptions? (limits to 3 lines max)
@@ -138,26 +144,35 @@ class BoardPage extends Component {
         }
         {
           appetizers.length > 0 &&
-          <PageHeader
-            heading="Appetizers"
-            description="Under an hour"
-          />
+          <div style={{ pageBreakBefore: 'always' }}>
+            <Header message={message} print />
+            <PageHeader
+              heading="Appetizers"
+              description="Under an hour"
+            />
+          </div>
         }
         { appetizers.map(game => <BoardGame key={game.id} {...game} succint={this.state.succint} />)}
         {
           lightFare.length > 0 &&
-          <PageHeader
-            heading="Light Fare"
-            description="1 - 3 hours"
-          />
+          <div style={{ pageBreakBefore: 'always' }}>
+            <Header message={message} print />
+            <PageHeader
+              heading="Light Fare"
+              description="1 - 3 hours"
+            />
+          </div>
         }
         { lightFare.map(game => <BoardGame key={game.id} {...game} succint={this.state.succint} />)}
         {
           mainCourse.length > 0 &&
-          <PageHeader
-            heading="Entrée"
-            description="> 3 hours"
-          />
+          <div style={{ pageBreakBefore: 'always' }}>
+            <Header message={message} print />
+            <PageHeader
+              heading="Entrée"
+              description="More than 3 hours"
+            />
+          </div>
         }
         { mainCourse.map(game => <BoardGame key={game.id} {...game} succint={this.state.succint} />)}
       </div>

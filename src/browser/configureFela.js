@@ -9,6 +9,11 @@ const staticStyles = `
     Selected rules from necolas.github.io/normalize.css/5.0.0/normalize.css
     I removed obsolete and normalizing stuff because we need only fixes.
   */ ''}
+  @media screen {
+    .print {
+      display: none;
+    }
+  }
   html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
