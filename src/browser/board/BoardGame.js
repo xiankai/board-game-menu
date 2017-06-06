@@ -52,7 +52,7 @@ export default class BoardGame extends Component {
     }
 
     return (
-      <div>
+      <div style={{ marginTop: 15, pageBreakInside: 'avoid' }}>
         <div style={{ verticalAlign: 'top', display: 'inline-block' }}>
           <Image
             src={image}
