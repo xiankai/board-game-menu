@@ -51,7 +51,7 @@ const theme: Theme = {
   },
   text: {
     bold: 600,
-    fontFamily: nativeFontFamily,
+    fontFamily: 'Lora, cursive',
   },
   block: {
     marginBottom: 1,
@@ -61,7 +61,7 @@ const theme: Theme = {
     borderRadius: 2,
   },
   heading: {
-    fontFamily: nativeFontFamily,
+    fontFamily: 'Indie Flower, cursive',
     marginBottom: 1,
   },
   paragraph: {

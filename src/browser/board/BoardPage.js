@@ -100,22 +100,35 @@ class BoardPage extends Component {
     }
 
     const {
+      params: { user },
       appetizers,
       lightFare,
       mainCourse,
       error,
     } = this.props;
 
+    const message = `${user}'s Board Games Menu`;
+
     return (
       <div>
         <h1 style={{
-          fontFamily: ['Monsieur La Doulaise', 'cursive'],
-          fontSize: 85,
+          fontFamily: ['Indie Flower', 'cursive'],
+          fontSize: 65,
           margin: '0 auto',
         }}>
-          Board Game Menu
+          { message }
         </h1>
-        <Title message="Board Games" />
+        <Title message={message} />
+
+        <p>
+          <strong>Notes: </strong>
+          <br />
+          You can click on the description to view the full blurb/customize it before printing.
+          <br />
+          Only the first paragraph with a longer length than a tweet (140 words) will be used for display.
+          <br />
+          Click anywhere outside of the textbox to exit editing.
+        </p>
         <label>
           <input type="checkbox" checked={this.state.succint} onChange={this.handleSuccintToggle} />
           Succint Descriptions? (limits to 3 lines max)
@@ -142,7 +155,7 @@ class BoardPage extends Component {
         {
           mainCourse.length > 0 &&
           <PageHeader
-            heading="Main Course"
+            heading="Entrée"
             description="> 3 hours"
           />
         }

@@ -66,11 +66,18 @@ export default class BoardGame extends Component {
           marginLeft: 10,
           width: 'calc(100% - 160px)',
         }}>
-          <div>
-            <strong>{ name }</strong>
+          <Heading style={() => ({
+            display: 'inline-block',
+            fontSize: 30,
+            marginBottom: 0,
+          })}>
+            { name }
+          </Heading>
+          <div style={{ display: 'inline-block', margin: '0 20px' }}>
+            <Text>{ players }</Text>
           </div>
-          <div>
-            <span>{ players }</span> <span>{ playtime }</span>
+          <div style={{ display: 'inline-block' }}>
+            <Text>{ playtime }</Text>
           </div>
           <div style={{ margin: '5px 0' }}>
             {

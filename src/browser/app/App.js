@@ -39,6 +39,7 @@ const App = (
       ]}
       link={[...favicon.link]}
     />
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lora" rel="stylesheet" />
     <Container>
       <Header />
       <Box

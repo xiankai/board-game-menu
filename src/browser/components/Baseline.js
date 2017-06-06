@@ -17,6 +17,7 @@ type BaselineProps = {|
 const styles = {
   container: {
     position: 'relative',
+    backgroundImage: 'url(http://www.designbolts.com/wp-content/uploads/2013/02/Free-Seamless-Wood-Textures-Patterns-For-3D-Mapping.jpg)',
   },
   baseline: lineHeight => ({
     backgroundImage: 'linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 1px, transparent 1px)',

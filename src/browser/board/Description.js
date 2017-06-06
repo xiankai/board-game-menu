@@ -1,5 +1,9 @@
 import React from 'react';
 
+import {
+  Text,
+} from '../../common/components';
+
 import { connect } from 'react-redux';
 import { description, resetDescription } from '../../common/board/actions';
 
@@ -65,6 +69,7 @@ class Description extends React.Component {
                     whiteSpace: 'pre-wrap',
                     display: this.state.editable ? 'none' : '-webkit-box',
                     fontSize: 15,
+                    fontFamily: 'Lora, cursive',
                     lineHeight: 1.2,
                     height: 15 * 1.2 * 3,
                     ...succint ? {
