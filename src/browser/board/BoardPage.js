@@ -32,7 +32,7 @@ class BoardPage extends Component {
   }
 
   componentDidMount() {
-    return this.setState({ loading: false }); // for debug
+    // return this.setState({ loading: false }); // for debug
     const { dispatch, params: { user } } = this.props;
 
     const fetchGames = fetch(`${corsProxy}/${bggApi}/collection/?username=${user}&excludesubtype=boardgameexpansion`)
