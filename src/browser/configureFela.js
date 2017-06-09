@@ -9,6 +9,10 @@ const staticStyles = `
     Selected rules from necolas.github.io/normalize.css/5.0.0/normalize.css
     I removed obsolete and normalizing stuff because we need only fixes.
   */ ''}
+  @page {
+    size: A4;
+    margin: 0;
+  }
   @media screen {
     .print {
       display: none;
@@ -17,6 +21,7 @@ const staticStyles = `
   html {
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    -webkit-print-color-adjust: exact; 
   }
   body {
     margin: 0;

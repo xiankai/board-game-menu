@@ -131,6 +131,8 @@ class BoardPage extends Component {
           Set margins to none.
           <br />
           Skip the first page by specifying pages 2-x where x is the total number of pages.
+          <br />
+          Tick the checkbox for Background Graphics
         </p>
 
         <Button success onClick={window.print}>Print</Button>
@@ -145,7 +147,7 @@ class BoardPage extends Component {
         {
           appetizers.length > 0 &&
           <div style={{ pageBreakBefore: 'always' }}>
-            <Header message={message} print />
+            {/* <Header message={message} print />*/}
             <PageHeader
               heading="Appetizers"
               description="Under an hour"
@@ -156,7 +158,7 @@ class BoardPage extends Component {
         {
           lightFare.length > 0 &&
           <div style={{ pageBreakBefore: 'always' }}>
-            <Header message={message} print />
+            {/* <Header message={message} print />*/}
             <PageHeader
               heading="Light Fare"
               description="1 - 3 hours"
@@ -167,7 +169,7 @@ class BoardPage extends Component {
         {
           mainCourse.length > 0 &&
           <div style={{ pageBreakBefore: 'always' }}>
-            <Header message={message} print />
+            {/* <Header message={message} print />*/}
             <PageHeader
               heading="Entrée"
               description="More than 3 hours"

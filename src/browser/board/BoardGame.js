@@ -81,7 +81,7 @@ export default class BoardGame extends Component {
           </div>
           <div style={{ margin: '5px 0' }}>
             {
-              category.map(category => (
+              category.slice(0, 6).map(category => (
                 <Label key={category} type="primary">
                   { category }
                 </Label>
@@ -90,7 +90,7 @@ export default class BoardGame extends Component {
           </div>
           <div>
             {
-              mechanic.map(mechanic => (
+              mechanic.slice(0, 6).map(mechanic => (
                 <Label key={mechanic} type="danger">
                   { mechanic }
                 </Label>
