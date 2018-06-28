@@ -12,7 +12,9 @@
     "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{gulp,src,webpack},__{tests,mocks}__}/**/*.js\"",
     "postinstall": "gulp native",
     "start": "node src/server",
-    "test": "gulp test"
+    "test": "gulp test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": "6.10.0"
@@ -80,7 +82,7 @@
     "intl-relativeformat": "^1.1.0",
     "invariant": "^2.1.2",
     "ip": "^1.0.2",
-    "jest": "^19.0.0",
+    "jest": "^23.0.0",
     "localforage": "^1.4.3",
     "make-error": "^1.0.4",
     "nconf": "^0.8.1",
@@ -126,6 +128,8 @@
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0",
     "webpack-isomorphic-tools": "^3.0.0",
-    "yargs": "^7.0.1"
-  }
+    "yargs": "^7.0.1",
+    "snyk": "^1.85.0"
+  },
+  "snyk": true
 }
