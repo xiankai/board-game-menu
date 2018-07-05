@@ -12,7 +12,9 @@
     "prettier": "prettier --bracket-spacing --single-quote --tab-width 2 --trailing-comma all --parser babylon --print-width 80  --write \"{{gulp,src,webpack},__{tests,mocks}__}/**/*.js\"",
     "postinstall": "gulp native",
     "start": "node src/server",
-    "test": "gulp test"
+    "test": "gulp test",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "engines": {
     "node": "6.10.0"
@@ -95,7 +97,7 @@
     "react-fela": "^4.0.1",
     "react-helmet": "^4.0.0",
     "react-intl": "^2.1.2",
-    "react-native": "^0.42.0",
+    "react-native": "^0.56.0",
     "react-native-fbsdk": "^0.5.0",
     "react-native-i18n": "^1.0.0",
     "react-native-side-menu": "^0.20.0",
@@ -126,6 +128,8 @@
     "webpack-dev-middleware": "^1.9.0",
     "webpack-hot-middleware": "^2.15.0",
     "webpack-isomorphic-tools": "^3.0.0",
-    "yargs": "^7.0.1"
-  }
+    "yargs": "^7.0.1",
+    "snyk": "^1.88.1"
+  },
+  "snyk": true
 }
